@@ -1,0 +1,74 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'homepages:home' %}">
+        Feuerwehr WebQuiz
+    </a>
+    <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="row">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'homepages:home' %}">Startseite</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Community</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Termine</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Lernen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Prüfungen</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'polls:index' %}">Umfragen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'knowledges:index' %}">Wissensdatenbank</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url 'knowledges:index' %}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Wissensdatenbank
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">FwDVs</a>
+                    <a class="dropdown-item" href="#">Fahrzeugkunde</a>
+                    <a class="dropdown-item" href="#">Gerätekunde</a>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+    <!--Profil-->
+        <ul class="navbar-nav ml-auto navbar-right"> 
+            <li class="nav-item"> 
+                <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profil
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Anzeigen</a>
+                            <a class="dropdown-item" href="#">Bearbeiten</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">Abmelden</a>
+                        </div>
+                    </li>
+                {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Anmelden</a>
+                        </li>
+                {% endif %}
+                </ul>
+            </li> 
+        </ul> 
+    </div> 
+</nav>
+

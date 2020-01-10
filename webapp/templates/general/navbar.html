@@ -1,0 +1,113 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark"> 
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> 
+        <ul class="navbar-nav mr-auto"> 
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'homepages:home' %}">Startseite</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'events:index' %}">Termine</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'knowledges:index' %}">Wissensdatenbank</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Standorte</a>
+            </li>
+        </ul> 
+    </div> 
+    <div class="mx-auto order-0"> 
+        <a class="navbar-brand mx-auto" href="#">Feuerwehr WebQuiz</a> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2"> 
+            <span class="navbar-toggler-icon"></span> 
+        </button> 
+    </div>
+    
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"> 
+        <ul class="navbar-nav ml-auto"> 
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Anzeigen</a>
+                        <a class="dropdown-item" href="#">Bearbeiten</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Abmelden</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Lernen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Prüfungen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'polls:index' %}">Umfragen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Community</a>
+                </li>
+            {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </a>
+                    <div class="dropdown-menu login-form" >
+                    <!--Login-->
+                        <form class="px-4 py-3" method="POST" action="{% url 'login' %}">
+                            {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="Username" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">Passwort</label>
+                            <input type="password" class="form-control" name="password" placeholder="Passwort" />
+                        </div>
+                        <div class="login-div-button">
+                            <button type="submit" class="btn btn-success login-button">Login</button>
+                        </div>
+                        </form>
+                        <div class="dropdown-divider"></div>
+                        
+                    <!--Register-->
+                        <form class="" method="POST" action="{% url 'register' %}">
+                            <a class="btn register-collaps login-text" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Du bist neu hier? Dann klick hier und registriere dich.
+                            </a>
+                            <div class="collapse px-4 py-3" id="collapseExample">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">Username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Username" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">Email</label>
+                                    <input type="email" class="form-control" name="username" placeholder="exampel@email.de" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">Passwort</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Passwort" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">Passwort wiederholen</label>
+                                    <input type="password" class="form-control" name="password2" placeholder="Passwort wiederholen" />
+                                </div>
+                                <div class="login-div-button">
+                                    <button type="submit" class="btn btn-success login-button">Register</button>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+
+                        <!--<div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Forgot password?</a>
+                        -->
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
+    </div> 
+</nav>
