@@ -30,6 +30,12 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+    "./general/static",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'units',
+    'newsletters',
+    'events',
+    'knowledges',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +67,11 @@ ROOT_URLCONF = 'webapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(os.path.dirname(__file__) ,'../templates').replace('\\','/'),
+            './webapp/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
