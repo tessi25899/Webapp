@@ -11,7 +11,8 @@ class Event(models.Model):
 
 
     def __str__(self):
-        return "({0}) {1}".format(self.date,self.name)
+        return "{0}".format(self.name)
+        #return "({0}) {1}".format(self.date,self.name)
 
 class Kindtable(models.Model):
     name = models.CharField(max_length=256)

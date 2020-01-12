@@ -8,13 +8,16 @@ from .forms import EventForm
 
 
 def index(request):
-    model = [Unit, Event]
     context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
     return render(request, template_name="events/index.html",context=context)
 
-def index_k(request):
-    model = [Unit, Event]
-    context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
+def show(request, unit):
+    if unit == 'alle':
+        unitid = Unit.objects.all()
+        context = {'events':Event.objects.filter().order_by('date'), 'units':Unit.objects.all(),}
+    else:
+        unitid = Unit.objects.get(slug=unit)
+        context = {'events':Event.objects.filter(unit=unitid).order_by('date'), 'units':Unit.objects.all(),}
     return render(request, template_name="events/index.html",context=context)
 
 def create(request):
