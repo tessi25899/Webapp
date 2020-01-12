@@ -12,4 +12,4 @@ class Unit(models.Model):
     endtime = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     def __str__(self):
-        return self.slug
+        return '{0}'.format(self.slug)

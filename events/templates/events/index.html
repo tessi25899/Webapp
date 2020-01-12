@@ -1,53 +1,18 @@
 {% extends 'general/main.html' %}
 {% load static %}
 {% block content%}
-<div class="row">
-    <div class="col-2 ">
-      <div class="card">
-        <div class="card-header">
-          <h5>Termine</h5>
-        </div>
-        <div class="nav-side nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-side nav-link btn btn-light active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true">Allgemein</a>
-          <a class="nav-side nav-link btn btn-light" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Kaster</a>
-          <a class="nav-side nav-link btn btn-light" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Bedburg</a>
-          <a class="nav-side nav-link btn btn-light" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"></a>
-        </div>
-        <div class="card-footer">
-
-          <button type="button" class="btn btn-light" data-toggle="modal" data-target="#examplecreate">
-            Hinzufügen
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="examplecreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Erstelle einen neuen Termin</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  {% include 'events\add.html' %}
-                </div>
-              </div>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center">Termine</div>
+          <div class="card-body">
+            {% include 'events/navbar.html' %} 
           </div>
-
-        </div>
+        
       </div>
-
-    </div>
-    <div class="col-10 main">
-      <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active"" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">{% include 'events\show.html' %}</div>
-        <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
-        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">{% include 'events\show.html' %}</div>
-        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+      <div class="col-8">
+        {% include 'events/show.html' %}
       </div>
     </div>
   </div>
-
 {% endblock %}
