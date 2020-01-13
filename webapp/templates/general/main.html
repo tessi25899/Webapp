@@ -15,17 +15,18 @@
 
   </head>
   <body>
-    
 
-      <div class="row">
-        <div class="col-sm">{% include 'general\navbar.html' %}</div>
+      <div class="row sticky-top">
+        <div class="col-sm shadow-lg pb-0 mb-2 bg-black rounded" >
+          {% include 'general\navbar.html' %}
+        </div>
       </div>
       <div class="row">
-        <div class="col-md-2">
+        <nav class="col-md-2" style="position: fixed;">
           {% block sidebar %}
           {% endblock %}
-        </div>
-        <div class="col-md">
+        </nav>
+        <div class="col-md"  id="content" style="position: relative; margin-left: 300px;">
           {% block content%}
           {% endblock %}
         </div>
