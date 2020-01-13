@@ -20,6 +20,10 @@ def show(request, unit):
         context = {'events':Event.objects.filter(unit=unitid).order_by('date'), 'units':Unit.objects.all(),}
     return render(request, template_name="events/index.html",context=context)
 
+def add(request):
+    context = {'events':Event.objects.filter().order_by('date'), 'units':Unit.objects.all(),'kinds':Kindtable.objects.all(),}
+    return render(request,'events/add.html',context=context)
+
 def create(request):
     if request.method == "POST":
         form = EventForm(request.POST)
@@ -28,3 +32,19 @@ def create(request):
             event.save()
             return render(request, 'events/index.html')
     return render(request, 'events/index.html')
+
+def edit(request, id):
+    if request.method == 'GET':
+        form = EventForm(request.GET)
+        
+    #context = {'events':Event.objects.get(id=id), 'units':Unit.objects.all(),'kinds':Kindtable.objects.all(),}
+    return render(request,'events/add.html')#,context=context)
+
+def delete(request,id):
+    try:
+        Event.objects.get(id=id).delete()
+    
+    finally:
+        context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
+    #return redirect(request, template_name="events/index.html",context=context)
+        return render(request, template_name="events/index.html",context=context)

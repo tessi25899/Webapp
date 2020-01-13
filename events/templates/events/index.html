@@ -1,18 +1,36 @@
 {% extends 'general/main.html' %}
 {% load static %}
+{% block sidebar %}
+    {% include 'events/sidebar.html' %}
+{% endblock%}
 {% block content%}
   <div class="container-fluid">
-    <div class="row">
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
-          <div class="card-header text-center">Termine</div>
-          <div class="card-body">
-            {% include 'events/navbar.html' %} 
-          </div>
-        
-      </div>
-      <div class="col-8">
-        {% include 'events/show.html' %}
-      </div>
+    {% load static %}
+    <div class="row row-cols-2 row-cols-md-4">
+        {% for event in events %}
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="row">
+                        {% if user.is_authenticated and request.user.is_superuser%}
+                            <div class="col-2"><a href="{% url 'events:edit_events' id=event.id %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
+                        {% endif %}
+                        <div class="col">{{event.date}}, {{event.time}}</div>
+                        {% if user.is_authenticated and request.user.is_superuser%}
+                            <div class="col-2"><a href="{% url 'events:delete_events' id=event.id %}"><img src="{% static 'icons/delete.svg' %}"></a></div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{event.name}} ({{event.kind}})</h5>
+                    <p class="card-text">{{event.description}}</p>
+                </div>
+                    <a class="card-footer btn btn-light" href="{% url 'units:show_units' unit=event.unit %}">
+                        Einheit: {{event.unit}}
+                    </a>
+    
+            </div>
+        {% endfor %}
+    </div>
     </div>
   </div>
 {% endblock %}
