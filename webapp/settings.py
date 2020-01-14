@@ -30,11 +30,14 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(SITE_ROOT, 'static/'),
     '/var/www/static/',
     "./general/static",
 ]
+
 
 # Application definition
 
@@ -122,9 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'europe/berlin'
 
 USE_I18N = True
 
