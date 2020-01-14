@@ -10,6 +10,6 @@ urlpatterns = [
     path('Termine/Einheit/<str:unit>',show ,name='show_events'),
     path('Termine/create/',create, name='create_events'),
     path('Termine/add/',add, name='add_events'),
-    path('Termine/edit/<int:id>',edit, name='edit_events'),
-    path('Termine/delete/<int:id>',delete, name='delete_events'),
+    path('Termine/<int:pk>/edit/',edit, name='edit_events'),
+    path('Termine/<int:id>/delete/',delete, name='delete_events'),
 ]

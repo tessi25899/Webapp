@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <div class="row">
                         {% if user.is_authenticated and request.user.is_superuser%}
-                            <div class="col-2"><a href="{% url 'events:edit_events' id=event.id %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
+                            <div class="col-2"><a href="{% url 'events:edit_events' pk=event.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
                         {% endif %}
                         <div class="col">{{event.date}}, {{event.time}}</div>
                         {% if user.is_authenticated and request.user.is_superuser%}

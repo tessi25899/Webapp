@@ -33,12 +33,19 @@ def create(request):
             return render(request, 'events/index.html')
     return render(request, 'events/index.html')
 
-def edit(request, id):
-    if request.method == 'GET':
-        form = EventForm(request.GET)
-        
-    #context = {'events':Event.objects.get(id=id), 'units':Unit.objects.all(),'kinds':Kindtable.objects.all(),}
-    return render(request,'events/add.html')#,context=context)
+def edit(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == "POST":
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.author = request.user
+            event.published_date = timezone.now()
+            event.save()
+            return redirect('event_detail', pk=event.pk)
+    else:
+        form = EventForm(instance=event)
+    return render(request, 'events/add.html', {'form': form})
 
 def delete(request,id):
     try:
