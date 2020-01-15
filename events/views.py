@@ -12,12 +12,15 @@ def index(request):
     return render(request, template_name="events/index.html",context=context)
 
 def show(request, unit):
-    if unit == 'alle':
+    if unit == 'Alle':
         unitid = Unit.objects.all()
         context = {'events':Event.objects.filter().order_by('date'), 'units':Unit.objects.all(),}
+    elif unit == 'Einheiten':
+        unitid = Unit.objects.all()
+        context = {'events':Event.objects.filter(forall=True).order_by('date'), 'units':Unit.objects.all(),}
     else:
         unitid = Unit.objects.get(slug=unit)
-        context = {'events':Event.objects.filter(unit=unitid).order_by('date'), 'units':Unit.objects.all(),}
+        context = {'events':Event.objects.filter(unit=unitid).order_by('date'), 'units':Unit.objects.all()}
     return render(request, template_name="events/index.html",context=context)
 
 def add(request):
@@ -25,12 +28,13 @@ def add(request):
     return render(request,'events/add.html',context=context)
 
 def create(request):
+    context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all()}
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
             event = form.save(commit=False)
             event.save()
-            return render(request, 'events/index.html')
+        return render(request, template_name="events/index.html",context=context)
     return render(request, 'events/index.html')
 
 def edit(request, pk):
@@ -53,5 +57,33 @@ def delete(request,id):
     
     finally:
         context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
-    #return redirect(request, template_name="events/index.html",context=context)
         return render(request, template_name="events/index.html",context=context)
+
+#def event_new(request):
+    if request.method == "POST":
+        form = EventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.save()
+            context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
+            return render(request, template_name="events/index.html",context=context)
+    else:
+        form = EventForm()
+    return render(request, 'events/add.html', {'form': form})
+
+def event_edit(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all()}
+    if request.method == "POST":
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.save()
+            context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all()}
+            return render(request, template_name="events/index.html",context=context)
+        else:
+            print("not valid")
+    else:
+        form = EventForm(instance=event)
+    context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all(),'form':form}
+    return render(request, 'events/event_edit.html', context=context )

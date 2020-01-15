@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <div class="row">
                         {% if user.is_authenticated and request.user.is_superuser%}
-                            <div class="col-2"><a href="{% url 'events:edit_events' pk=event.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
+                            <div class="col-2"><a href="{% url 'events:event_edit' pk=event.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
                         {% endif %}
                         <div class="col">{{event.date}}, {{event.time}}</div>
                         {% if user.is_authenticated and request.user.is_superuser%}
@@ -24,10 +24,15 @@
                     <h5 class="card-title">{{event.name}} ({{event.kind}})</h5>
                     <p class="card-text">{{event.description}}</p>
                 </div>
-                    <a class="card-footer btn btn-light" href="{% url 'units:show_units' unit=event.unit %}">
-                        Einheit: {{event.unit}}
-                    </a>
-    
+                    {% if event.forall == True %}
+                        <a class="card-footer btn btn-light" href="{% url 'units:index'%}">
+                            Alle Einheiten
+                        </a>
+                    {% else %}
+                        <a class="card-footer btn btn-light" href="{% url 'units:show_units' unit=event.unit %}">
+                            Einheit: {{event.unit}}
+                        </a>
+                    {% endif %}
             </div>
         {% endfor %}
     </div>
