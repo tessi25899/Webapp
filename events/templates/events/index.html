@@ -5,8 +5,7 @@
 {% endblock%}
 {% block content%}
   <div class="container-fluid">
-    {% load static %}
-    <div class="row row-cols-2 row-cols-md-4">
+    <div class="card-columns">
         {% for event in events %}
             <div class="card text-center">
                 <div class="card-header">
@@ -16,7 +15,7 @@
                         {% endif %}
                         <div class="col">{{event.date}}, {{event.time}}</div>
                         {% if user.is_authenticated and request.user.is_superuser%}
-                            <div class="col-2"><a href="{% url 'events:delete_events' id=event.id %}"><img src="{% static 'icons/delete.svg' %}"></a></div>
+                            <div class="col-2"><a href="{% url 'events:event_delete' pk=event.pk %}"><img src="{% static 'icons/delete.svg' %}"></a></div>
                         {% endif %}
                     </div>
                 </div>
@@ -24,18 +23,20 @@
                     <h5 class="card-title">{{event.name}} ({{event.kind}})</h5>
                     <p class="card-text">{{event.description}}</p>
                 </div>
-                    {% if event.forall == True %}
-                        <a class="card-footer btn btn-light" href="{% url 'units:index'%}">
-                            Alle Einheiten
-                        </a>
-                    {% else %}
-                        <a class="card-footer btn btn-light" href="{% url 'units:show_units' unit=event.unit %}">
-                            Einheit: {{event.unit}}
-                        </a>
-                    {% endif %}
+                <div class="card-footer">
+                    {% if event.unit.slug == 'Stadt' %}
+                    <a class="btn btn-light" href="{% url 'units:index'%}">
+                        Alle Einheiten
+                    </a>
+                {% else %}
+                    <a class="btn btn-light" href="{% url 'units:show_units' unit=event.unit %}">
+                        Einheit: {{event.unit}}
+                    </a>
+                {% endif %}
+                </div>
+
             </div>
         {% endfor %}
-    </div>
     </div>
   </div>
 {% endblock %}
