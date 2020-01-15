@@ -1,0 +1,24 @@
+{% load static %}
+<div class="card text-left">
+    <div class="card-header text-center">
+      Termine
+    </div>
+    <div class="nav flex-column nav-pills text-left"aria-orientation="vertical">
+        <a class="nav-link btn btn-light text-left"  href="{% url 'events:show_events' unit='Alle' %}">Alle Termine</a>
+        {% for unit in units %}
+            {% if unit.slug == 'Stadt' %}
+                <a class="nav-link btn btn-light text-left" href="{% url 'events:show_events' unit=unit.slug %}">{{unit.name}}</a>
+            {% else %}
+                <a class="nav-link btn btn-light text-left" href="{% url 'events:show_events' unit=unit.slug %}">Einheit {{unit.slug}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated and request.user.is_superuser%}
+        <div class="card-footer nav flex-column nav-pills">
+            <a class="nav-link btn btn-light" href="{% url 'events:event_create' %}">
+                <img src="{% static 'icons/add_event.svg' %}">
+            </a>
+        </div>
+    {% endif %}
+</div>
+

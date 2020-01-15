@@ -1,0 +1,17 @@
+{% load static %}
+<div class="card text-center">
+  <div class="card-header">
+    Profil von: {{profile.username}}
+  </div>
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link btn btn-light text-left" id="v-pills-profil-tab" data-toggle="pill" href="#v-pills-profil" role="tab" aria-controls="v-pills-profil" aria-selected="true">Dein Profil</a>
+      <a class="nav-link btn btn-light text-left" id="v-pills-badges-tab" data-toggle="pill" href="#v-pills-badges" role="tab" aria-controls="v-pills-badges" aria-selected="false">Abzeichen</a>
+      <a class="nav-link btn btn-light text-left" id="v-pills-hobbys-tab" data-toggle="pill" href="#v-pills-hobbys" role="tab" aria-controls="v-pills-hobbys" aria-selected="false">Freizeit</a>
+      <a class="nav-link btn btn-light text-left" id="v-pills-friends-tab" data-toggle="pill" href="#v-pills-friends" role="tab" aria-controls="v-pills-friends" aria-selected="false">Freunde</a>
+    </div>
+  {% if profile.admin == True %}
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+  {% endif %}
+</div>

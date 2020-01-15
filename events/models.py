@@ -8,7 +8,6 @@ class Event(models.Model):
     unit = models.ForeignKey(to= 'units.Unit',on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     time =  models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    forall = models.BooleanField(null=True, blank=True, default=False)
 
     def __str__(self):
         return "{0}".format(self.name)

@@ -1,0 +1,145 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% block sidebar %}
+    {% include 'profiles/sidebar_detail.html' %}
+{% endblock%}
+{% block content %}
+
+<div class="card w-75"  >
+    <h3 class="card-header">
+        <div class="row">
+            <div class="col col-4 mt-2">
+                {% if profile.image %}
+                    <div class="text-center card">
+                        <img src="{{ profile.image.url }}" class="figure-img img-fluid rounded" style="width: 100%; vertical-align: center;" alt="images.{{profile.profilename}}">
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col mt-2">
+                <h3 class="card-title">
+                    {{profile.username}}
+                    {% if profile.group.name == 'Leiter der Feuerwehr' %}
+                    <span class="badge badge-warning">{{profile.group}}</span>
+                    {% elif profile.group.name == 'Einheitsführer' %}
+                        <span class="badge badge-dark">{{profile.group}}</span>
+                    {% elif profile.group.name == 'Stadtjugendwart' %}
+                        <span class="badge badge-danger">{{profile.group}}</span>
+                    {% elif profile.group.name == 'Jugendwart' %}
+                        <span class="badge badge-success">{{profile.group}}</span>
+                    {% elif profile.group.name == 'Unterstützungseinheit' %}
+                        <span class="badge badge-info">{{profile.group}}</span>
+                    {% elif profile.group.name == 'Jugendfeuerwehr' %}
+                        <span class="badge badge-secondary">{{profile.group}}</span>
+                    {% endif %}
+                </a>
+                    <h5 class="card-title text-muted">{{profile.lastname}}, {{profile.firstname}}</h5>
+                <h5>
+                    Derzeitige Einheit:
+                    <br>
+                    <a class="text-muted" href="{% url 'units:show_units' unit=profile.unit.slug %}">
+                        <ul class="list-unstyled">
+                            <li><small>{{unit.name}}</small></li>
+                            <li><small>{{unit.street}}, {{unit.housenumber}}</small></li>
+                            <li><small>{{unit.postcode}} {{unit.place}}</small></li>
+                        </ul>                        
+                    </a>
+
+                </h5>
+
+            </div>
+        </div>
+    </h3>
+
+    <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-profil" role="tabpanel" aria-labelledby="v-pills-profil-tab">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        Biografie:
+                    </h6>
+                    <p class="card-text">
+                        {{profile.biographie}}
+                    </p>
+                    <h6 class="card-title">
+                        derzeitige Beschäftigung:
+                    </h6>
+                    <p class="card-text">
+                        {{profile.job}}
+                    </p>
+                    <h6 class="card-title">
+                        Dein Beweggrund in die Feuerwehr einzutreten:
+                    </h6>
+                    <p class="card-text">
+                        {{profile.motivation}}
+                    </p>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-friends" role="tabpanel" aria-labelledby="v-pills-friends-tab">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        Hobbys:
+                    </h6>
+                    <p class="card-text text-muted">
+                        <ul class="list-unstyled">
+                            <li>Einheit: {{profile.unit}}</li>
+                            <li>Geburtstag: {{profile.birthday}} ({{profile.age}})</li>
+                            <li>Email: {{profile.email}}</li>
+                            <li>Handynummer: {{profile.mobile}}</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-hobbys" role="tabpanel" aria-labelledby="v-pills-hobbys-tab">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        Hobbys
+                    </h6>
+                    <p class="card-text text-muted">
+                        {% for hobby in hobbys %}
+                            {{hobby.name}}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-badges" role="tabpanel" aria-labelledby="v-pills-badges-tab">
+                <div class="card-body">
+                <h5 class="card-title">
+                    Abzeichen:
+                </h5>
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    {% for badge in badges %}
+                            <div class="p-2 bd-highlight">
+                                <div class="card mb-3" >
+                                    <div class="row no-gutters">
+                                        <div class="col-md-2">
+                                            <img src="{{badge.badge.image.url}}" class="card-img" alt="{{badge.badge}}">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    {{badge.badge}}
+
+                                                </h5>
+                                                <small class="text-muted">{{badge.badge.description}}</small>
+                                                <p class="card-text text-muted">
+                                                    <ul class="list-unstyled">
+                                                        <li>{{badge.date}}</li>
+                                                        {% if badge.completed == True  %}
+                                                            <li><span class="badge badge-success">Erfolgreich Bestanden!</span></li>
+                                                        {% else %}
+
+                                                            <li><span class="badge badge-secondary">Erfolgreich Unterstützt!</span></li>
+                                                        {% endif %}
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>               
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+{% endblock %}
