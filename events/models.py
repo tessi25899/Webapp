@@ -15,6 +15,7 @@ class Event(models.Model):
 
 class Kindtable(models.Model):
     name = models.CharField(max_length=256)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return "{0}".format(self.name)
