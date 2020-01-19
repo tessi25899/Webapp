@@ -1,0 +1,56 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% block sidebar %}
+    {% include 'newsletters/sidebar.html' %}
+{% endblock%}
+{% block content%}
+<div class="row card-deck">
+  <div class="col">
+    <form method="POST" class="event-form">{% csrf_token %}
+      <div class="card text-center" style="width: 30rem;">
+          <div class="card-header">
+            {{titel}}
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Titel</span>
+              </div>
+              {{form.name}}
+          </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Topic</span>
+              </div>
+              {{ form.topic}}
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Nachricht</label>
+              </div>
+              {{form.message}}
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Veröffentlicht</label>
+              </div>
+              {{form.published}}
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Ersteller</span>
+              </div>
+              {{form.created_by}}
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            <div class="login-div-button">
+              <input type="submit" value="Hinzufügen" name="save" id="save" class="btn btn-success login-button"/>
+            </div>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

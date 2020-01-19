@@ -1,0 +1,29 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% block sidebar %}
+    {% include 'events/sidebar.html' %}
+{% endblock%}
+{% block content%}
+  <div class="container-fluid">
+    <div class="card-columns">
+        {% for kind in kinds %}
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="row">
+                        {% if user.is_authenticated and request.user.is_superuser%}
+                            <div class="col-2"><a href="{% url 'events:kind_edit' pk=kind.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
+                        {% endif %}
+                        <div class="col">{{kind.name}}</div>
+                        {% if user.is_authenticated and request.user.is_superuser%}
+                            <div class="col-2"><a href="{% url 'events:kind_delete' pk=kind.pk %}"><img src="{% static 'icons/delete.svg' %}"></a></div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{kind.description}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}

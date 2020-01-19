@@ -6,7 +6,7 @@ from . import views
 app_name = 'events'
 
 urlpatterns = [
-    path('Termine/', index, name='index'),
+    path('Termine/', index, name='events_index'),
     #EVENT:
     path('Termine/<str:unit>', views.events_show, name='events_show'),
     path('Termine/create/', views.event_create, name='event_create'),

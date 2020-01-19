@@ -21,13 +21,12 @@ def events_show(request, unit):
         context = {'events':Event.objects.filter(unit=unitid).order_by('date'), 'units':Unit.objects.all()}
     return render(request, template_name="events/event_index.html",context=context)
 def event_create(request):
-    context = {'events':Event.objects.filter().order_by('date'), 'units':Unit.objects.all(),'kinds':Kindtable.objects.all(),'titel':'Termin erstellen'}
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
             event = form.save(commit=False)
             event.save()
-            return render(request, template_name="events/event_index.html",context=context)
+            return redirect(reverse('events:events_index'))
     else:
         form = EventForm()
     context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all(),'form':form, 'titel':'Termin erstellen'}
@@ -41,7 +40,7 @@ def event_edit(request, pk):
             print(event.date)
             event = form.save(commit=False)
             event.save()
-            return render(request, template_name="events/event_index.html",context=context)
+            return redirect(reverse('events:events_index'))
         else:
             print("not valid")
     else:
@@ -53,35 +52,32 @@ def event_delete(request,pk):
         Event.objects.get(pk=pk).delete()
     
     finally:
-        context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
-        return render(request, template_name="events/event_index.html",context=context)
+        return redirect(reverse('events:events_index'))
 
 #KINDTABLE
 def kind_show(request):
     context = {'kinds':Kindtable.objects.all(), 'units':Unit.objects.all(),}
     return render(request, template_name="events/kind_index.html",context=context)
 def kind_create(request):
-    context = {'units':Unit.objects.all(),'kinds':Kindtable.objects.all(),'titel':'Kategorie erstellen'}
     if request.method == "POST":
         form = KindForm(request.POST)
         if form.is_valid():
             kind = form.save(commit=False)
             kind.save()
             print("create")
-            return render(request, template_name="events/kind_index.html",context=context)
+            return redirect(reverse('events:kind_show'))
     else:
         form = KindForm()
     context = {'units':Unit.objects.all(), 'kinds':Kindtable.objects.all(),'form':form, 'titel':'Kategorie bearbeiten'}
     return render(request, 'events/kind_form.html', context=context )
 def kind_edit(request, pk):
     event = get_object_or_404(Kindtable, pk=pk)
-    context = {'units':Unit.objects.all(), 'titel':'Kategorie bearbeiten'}
     if request.method == "POST":
         form = KindForm(request.POST, instance=event)
         if form.is_valid():
             kind = form.save(commit=False)
             kind.save()
-            return render(request, template_name="events/kind_index.html",context=context)
+            return redirect(reverse('events:kind_show'))
         else:
             print("not valid")
     else:
@@ -91,8 +87,6 @@ def kind_edit(request, pk):
 def kind_delete(request,pk):
     try:
         Kindtable.objects.get(pk=pk).delete()
-    
     finally:
-        context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all()}
-        return render(request, template_name="events/kind_index.html",context=context)
+        return redirect(reverse('events:kind_show'))
 
