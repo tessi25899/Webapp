@@ -10,18 +10,20 @@
             <h5 class="card-header">
                     <a href="{% url 'profiles:detail_profil' user=user.username %}" class="nav-link">
                         {{user.username}}
-                        {% if user.group.name == 'Leiter der Feuerwehr' %}
-                        <span class="badge badge-warning">{{user.group}}</span>
-                        {% elif user.group.name == 'Einheitsführer' %}
-                            <span class="badge badge-dark">{{user.group}}</span>
-                        {% elif user.group.name == 'Stadtjugendwart' %}
-                            <span class="badge badge-danger">{{user.group}}</span>
-                        {% elif user.group.name == 'Jugendwart' %}
-                            <span class="badge badge-success">{{user.group}}</span>
-                        {% elif user.group.name == 'Unterstützungseinheit' %}
-                            <span class="badge badge-info">{{user.group}}</span>
-                        {% elif user.group.name == 'Jugendfeuerwehr' %}
-                            <span class="badge badge-secondary">{{user.group}}</span>
+                        {% if user.role.name == 'Leiter der Feuerwehr' %}
+                            <span class="badge badge-warning">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Einheitsführer' %}
+                            <span class="badge badge-dark">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Stadtjugendwart' %}
+                            <span class="badge badge-danger">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Admin' %}
+                            <span class="badge badge-success">Jugendwart</span>
+                        {% elif user.role.name == 'Jugendwart' %}
+                            <span class="badge badge-success">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Betreuerteam' %}
+                            <span class="badge badge-info">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Jugendfeuerwehr' %}
+                            <span class="badge badge-secondary">{{user.role.show_name}}</span>
                         {% endif %}
                     </a>
             </h5>

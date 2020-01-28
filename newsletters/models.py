@@ -4,6 +4,7 @@ from profiles.models import Profile
 class News(models.Model):
     name = models.CharField(max_length=256)
     topic = models.ForeignKey(to='Topic', on_delete=models.CASCADE, null=True, blank=True)
+    image = models.ImageField(upload_to='news_images' ,null=True, blank=True)
     message = models.TextField()
     published = models.DateField(null=True, blank=True)
     created_by = models.ForeignKey(to= 'profiles.Profile',on_delete=models.DO_NOTHING, null=True, blank=True)

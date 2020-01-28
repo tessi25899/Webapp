@@ -4,4 +4,4 @@ from .models import Unit
 class UnitCreateForm(forms.ModelForm):
     class Meta:
         model= Unit
-        fields= ('slug', 'name', 'street', 'housenumber', 'postcode', 'place', 'day', 'starttime', 'endtime')
+        fields= ('slug', 'name', 'street', 'housenumber', 'postcode', 'place',)

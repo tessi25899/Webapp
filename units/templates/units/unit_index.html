@@ -2,7 +2,7 @@
 {% load static %}
 {% load imagefit %}
 {% block sidebar %}
-    {% include 'newsletters/sidebar.html' %}
+    {% include 'units/sidebar.html' %}
 {% endblock%}
 {% block content%}
   <div class="container-fluid ">
@@ -12,13 +12,13 @@
           <div class="card text-center">
             <div class="card-header">
               <div class="row">
-                {% if user.is_authenticated and c_user == True%}
-                    <div class="col-2"><a href="{% url 'newsletters:news_edit' pk=newsletter.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
-                {% endif %}
+                {#% if user.is_authenticated and e_user == True%}
+                    <!--<div class="col-2"><a href="{% url 'newsletters:news_edit' pk=newsletter.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>-->
+                {#% endif %}
                 <div class="col">{{newsletter.topic}}</div>
-                {% if user.is_authenticated and c_user == True%}
-                    <div class="col-2"><a href="{% url 'newsletters:news_delete' pk=newsletter.pk %}"><img src="{% static 'icons/delete.svg' %}"></a></div>
-                {% endif %}
+                {#% if user.is_authenticated and e_user == True%}
+                    <!--<div class="col-2"><a href="{% url 'newsletters:news_delete' pk=newsletter.pk %}"><img src="{% static 'icons/delete.svg' %}"></a></div>-->
+                {#% endif %}
               </div>
             </div>
             <div class="card-body">

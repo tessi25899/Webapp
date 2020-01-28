@@ -1,15 +1,16 @@
 {% load static %}
 <div class="card text-left">
     <div class="card-header text-center">
-      Themen
+      Standorte / Einheiten
     </div>
     <div class="nav flex-column nav-pills text-left"aria-orientation="vertical">
-        <a class="nav-link btn btn-light text-left"  href="{% url 'newsletters:news_show' topic='Alle' %}">Alle Nachrichten</a>
-        {% for topic in topics %}
-            <a class="nav-link btn btn-light text-left" title="{{ topic.description }}" href="{% url 'newsletters:news_show' topic=topic.name %}">{{ topic.name }}</a>
+        <a class="nav-link btn btn-light text-left"  href="{% url 'units:units_index' %}">Alle Standorte/Einheiten</a>
+        {% for unit in units %}
+            <a class="nav-link btn btn-light text-left" title="{{ unit.name }}" href="{% url 'units:unit_detail' unit=unit.slug %}">{{ unit.slug }}</a>
         {% endfor %}
     </div>
-    {% if user.is_authenticated and c_user == True %}
+    {% if user.is_authenticated and user_permissions.e_user == True %}
+    IN PROGRESS
         <div class="card-footer nav justify-content-center nav-pills">
             <a class="nav-link btn btn-light" title="Erstelle eine neue Nachricht" href="{% url 'newsletters:news_create' %}">
                 <img src="{% static 'icons/add.svg' %}">
