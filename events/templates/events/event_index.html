@@ -25,11 +25,11 @@
                 </div>
                 <div class="card-footer">
                     {% if event.unit.slug == 'Stadt' %}
-                    <a class="btn btn-light" href="{% url 'units:index'%}">
+                    <a class="btn btn-light" href="{% url 'units:units_index'%}">
                         Alle Einheiten
                     </a>
                 {% else %}
-                    <a class="btn btn-light" href="{% url 'units:show_units' unit=event.unit %}">
+                    <a class="btn btn-light" href="{% url 'units:unit_detail' unit=event.unit %}">
                         Einheit: {{event.unit}}
                     </a>
                 {% endif %}

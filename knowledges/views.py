@@ -5,11 +5,11 @@ from django.views import generic
 from .models import *
 
 def index(request):
-    context = {'objects':Fwdv.objects.all(), 'titel': "FwDVs"}
+    context = {'objects':Topic.objects.all(), 'titel': "FwDVs"}
     return render(request=request, template_name="knowledges/index.html",context=context)
 
 def index_fwdv(request):
-    context = {'objects':Fwdv.objects.all(), 'titel': "FwDVs"}
+    context = {'objects':Topic.objects.all(), 'titel': "FwDVs"}
     return render(request=request, template_name='knowledges/index_fwdv.html',context=context)
 
 def index_knowledge(request, slug):
@@ -23,5 +23,6 @@ def index_content(request, slug, id):
 
 
 class KnowledgeDetailView(generic.DetailView):
-    model = Knowledgecontent
-    template_name = 'knowledges/detail_content.html'
+    pass
+    #model = 
+    #template_name = 'knowledges/detail_content.html'

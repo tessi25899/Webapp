@@ -15,21 +15,23 @@
 
   </head>
   <body>
-      <div class="row sticky-top">
-        <div class="col-sm shadow-lg pb-0 mb-2 bg-black rounded" >
-          {% include 'general\navbar.html' %}
-        </div>
-      </div>
-      <div class="row content">
-        <nav class="col-md-2" style="position: fixed;">
-          {% block sidebar %}
-          {% endblock %}
-        </nav>
-        <div class="col-md"  id="content" style="position: relative; margin-left: 300px;">
-          {% block content%}
-          {% endblock %}
-        </div>
-      </div>
+    <div class="justify-content-md-center sticky-top shadow-sm pb-0 mb-2 bg-black rounded">
+      {% include 'general\navbar.html' %}
+  </div>
+  <div class="row">
+    <div class="col-sm-2 position-fixed">
+      {% block sidebar %}
+      Sidebar
+      {% endblock %}
+    </div>
+    <div class="col-sm offset-2">
+      {% block content%}
+      Content
+      {% endblock %}
+    </div>
+  </div>
+
+
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

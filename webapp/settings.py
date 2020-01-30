@@ -38,6 +38,7 @@ STATICFILES_DIRS = [
     "./general/static",
 ]
 
+IMAGEFIT_ROOT = "public"
 
 # Application definition
 
@@ -48,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'imagefit',
     'users.apps.UsersConfig',
+    'equipments',
     'profiles',
     'units',
     'newsletters',

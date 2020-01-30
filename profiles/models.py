@@ -47,10 +47,14 @@ class Group(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=256) 
+    prio = models.IntegerField(unique=True, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     
     def __str__(self):
-        return '({0}){1}'.format(self.id,self.name)
+        return '(Prio: {0}) {1} [{2}]'.format(self.prio,self.name, self.id)
+    
+    def show_name(self):
+        return self.name
 
 class Badge(models.Model):
     name = models.CharField(max_length=256)

@@ -1,0 +1,31 @@
+{% load static %}
+<div class="card text-left">
+    <div class="card-header text-center">
+      Standorte / Einheiten
+    </div>
+    <div class="nav flex-column nav-pills text-left"aria-orientation="vertical">
+        <a class="nav-link btn btn-light text-left"  href="{% url 'units:units_index' %}">Alle Standorte/Einheiten</a>
+        {% for unit in units %}
+            <a class="nav-link btn btn-light text-left" title="{{ unit.name }}" href="{% url 'units:unit_detail' unit=unit.slug %}">{{ unit.slug }}</a>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated and user_permissions.e_user == True %}
+    IN PROGRESS
+        <div class="card-footer nav justify-content-center nav-pills">
+            <a class="nav-link btn btn-light" title="Erstelle eine neue Nachricht" href="{% url 'newsletters:news_create' %}">
+                <img src="{% static 'icons/add.svg' %}">
+                <img src="{% static 'icons/add_comment.svg' %}">
+            </a>
+            
+
+        </div>
+        <div class="card-footer nav justify-content-center nav-pills">
+            <a class="nav-link btn btn-light" title="Erstelle ein neues Thema" href="{% url 'newsletters:topic_create' %}">
+                <img src="{% static 'icons/library_add.svg' %}">
+            </a>
+            <a class="nav-link btn btn-light" title="Siehe dir alle Themen an" href="{% url 'newsletters:topic_show' %}">
+                <img src="{% static 'icons/library_books.svg' %}">
+            </a>
+        </div>
+    {% endif %}
+</div>

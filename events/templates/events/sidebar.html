@@ -4,19 +4,28 @@
       Termine
     </div>
     <div class="nav flex-column nav-pills text-left"aria-orientation="vertical">
-        <a class="nav-link btn btn-light text-left"  href="{% url 'events:show_events' unit='Alle' %}">Alle Termine</a>
+        <a class="nav-link btn btn-light text-left"  href="{% url 'events:events_show' unit='Alle' %}">Alle Termine</a>
         {% for unit in units %}
             {% if unit.slug == 'Stadt' %}
-                <a class="nav-link btn btn-light text-left" href="{% url 'events:show_events' unit=unit.slug %}">{{unit.name}}</a>
+                <a class="nav-link btn btn-light text-left" href="{% url 'events:events_show' unit=unit.slug %}">{{unit.name}}</a>
             {% else %}
-                <a class="nav-link btn btn-light text-left" href="{% url 'events:show_events' unit=unit.slug %}">Einheit {{unit.slug}}</a>
+                <a class="nav-link btn btn-light text-left" href="{% url 'events:events_show' unit=unit.slug %}">Einheit {{unit.slug}}</a>
             {% endif %}
         {% endfor %}
     </div>
     {% if user.is_authenticated and request.user.is_superuser%}
         <div class="card-footer nav flex-column nav-pills">
-            <a class="nav-link btn btn-light" href="{% url 'events:event_create' %}">
-                <img src="{% static 'icons/add_event.svg' %}">
+            <a class="nav-link btn btn-light"  title="Erstelle einen neuen Termin"  href="{% url 'events:event_create' %}">
+                <img src="{% static 'icons/add.svg' %}">
+                <img src="{% static 'icons/event-note.svg' %}">
+            </a>
+        </div>
+        <div class="card-footer nav justify-content-center nav-pills">
+            <a class="nav-link btn btn-light" title="Erstelle eine neue Kategorie" href="{% url 'events:kind_create' %}">
+                <img src="{% static 'icons/library_add.svg' %}">
+            </a>
+            <a class="nav-link btn btn-light" title="Erstelle eine neue Kategorie" href="{% url 'events:kind_show' %}">
+                <img src="{% static 'icons/library_books.svg' %}">
             </a>
         </div>
     {% endif %}
