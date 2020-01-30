@@ -1,0 +1,49 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% block sidebar %}
+    {% include 'profiles/sidebar_index.html' %}
+{% endblock%}
+{% block content %}
+<div class="card-columns">
+    {% for user in users %}
+        <div class="card w-75"  >
+            <h5 class="card-header">
+                    <a href="{% url 'profiles:detail_profil' user=user.username %}" class="nav-link">
+                        {{user.username}}
+                        {% if user.role.name == 'Leiter der Feuerwehr' %}
+                            <span class="badge badge-warning">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Einheitsführer' %}
+                            <span class="badge badge-dark">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Stadtjugendwart' %}
+                            <span class="badge badge-danger">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Admin' %}
+                            <span class="badge badge-success">Jugendwart</span>
+                        {% elif user.role.name == 'Jugendwart' %}
+                            <span class="badge badge-success">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Betreuerteam' %}
+                            <span class="badge badge-info">{{user.role.show_name}}</span>
+                        {% elif user.role.name == 'Jugendfeuerwehr' %}
+                            <span class="badge badge-secondary">{{user.role.show_name}}</span>
+                        {% endif %}
+                    </a>
+            </h5>
+            {% if user.image %}
+            <div class="text-center card">
+                <img src="{{ user.image.url }}" class="figure-img img-fluid rounded" style="width: 70%; vertical-align: center;" alt="images.{{user.username}}">
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-title">{{user.lastname}}, {{user.firstname}}</h6>
+                <p class="card-text text-muted">
+                    <ul class="list-unstyled">
+                        <li>Einheit: {{user.unit}}</li>
+                        <li>Geburtstag: {{user.birthday}} ({{user.age}})</li>
+                        <li>Email: {{user.email}}</li>
+                        <li>Handynummer: {{user.mobile}}</li>
+                    </ul>
+                </p>
+            </div>
+        </div>   
+    {% endfor %}
+</div>
+{% endblock %}

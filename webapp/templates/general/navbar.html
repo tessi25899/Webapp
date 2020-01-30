@@ -1,52 +1,55 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark"> 
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> 
-        <ul class="navbar-nav mr-auto"> 
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'homepages:home' %}">Startseite</a>
+                <a class="nav-link" href="{% url 'newsletters:news_index' %}">Startseite</a>
              </li>
              <li class="nav-item">
-                <a class="nav-link" href="{% url 'events:index' %}">Termine</a>
+                <a class="nav-link" href="{% url 'events:events_index' %}">Termine</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'knowledges:index' %}">Wissensdatenbank</a>
+                <a class="nav-link disabled" href="{% url 'knowledges:index' %}">Wissensdatenbank</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Standorte</a>
+                <a class="nav-link" href="{% url 'units:units_index' %}">Standorte</a>
             </li>
-        </ul> 
-    </div> 
-    <div class="mx-auto order-0"> 
-        <a class="navbar-brand mx-auto" href="#">Feuerwehr WebQuiz</a> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2"> 
-            <span class="navbar-toggler-icon"></span> 
-        </button> 
+        </ul>
     </div>
-    
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"> 
-        <ul class="navbar-nav ml-auto"> 
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Firefighter Webapp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+    <div class="navbar-collapse collapse w-100 order-2 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Profil
+                        {{ user.username }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Anzeigen</a>
+                    <div class="dropdown-menu dropdown-menu-custom"  aria-labelledby="navbarDropdownMenuLink">
+                        <h6 class="dropdown-header">Dropdown header</h6>
+                        <a class="dropdown-item" href="{% url 'profiles:detail_profil' user=user.username %}">Anzeigen</a>
+                        <a class="dropdown-item" href="{% url 'profiles:index' %}">alle Anzeigen</a>
                         <a class="dropdown-item" href="#">Bearbeiten</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">Abmelden</a>
+                        <h6 class="dropdown-header">Dropdown header</h6>
+                        <a class="dropdown-item disabled" href="#">Lernen</a>
+                        <a class="dropdown-item disabled" href="">Umfragen</a>
+                        <a class="dropdown-item disabled" href="#">Community</a>
+                        <div class="dropdown-divider"></div>
+                            {% if request.user.is_superuser %}
+                                <h6 class="dropdown-header">Dropdown header</h6>
+                                <a class="dropdown-item disabled" href="#">Adminseite</a>
+                                <a class="dropdown-item disabled" href="#">Büromaterial</a>
+                                <a class="dropdown-item disabled" href="#">Vorlagen</a>
+                                <div class="dropdown-divider"></div>
+                            {% endif %}
+                        <a class="dropdown-item" href="{% url 'logout' %}">Abmelden</a>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Lernen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Prüfungen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'polls:index' %}">Umfragen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Community</a>
                 </li>
             {% else %}
                 <li class="nav-item dropdown">
@@ -70,9 +73,9 @@
                         </div>
                         </form>
                         <div class="dropdown-divider"></div>
-                        
+
                     <!--Register-->
-                        <form class="" method="POST" action="{% url 'register' %}">
+                        <form class="" method="POST" action={% url 'signup' %}>
                             <a class="btn register-collaps login-text" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Du bist neu hier? Dann klick hier und registriere dich.
                             </a>
@@ -109,5 +112,5 @@
                 </li>
             {% endif %}
         </ul>
-    </div> 
+    </div>
 </nav>

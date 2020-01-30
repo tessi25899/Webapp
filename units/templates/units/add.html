@@ -1,0 +1,70 @@
+<form method="POST" action="{% url 'units:create_unit' %}">
+    {% csrf_token %}
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Einheit:</span>
+        </div>
+            <input type="text" class="form-control" id="slug" name="slug" placeholder="Einheitsname">
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Vollständiger Name:</span>
+        </div>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Freiwilige Feuerwehr Löschzug/Löschgruppe Einheit">
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Straße:</span>
+        </div>
+        <input type="text" class="form-control" id="street" name="street" placeholder="Straße">
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Hausnummer:</span>
+        </div>
+        <input type="text" class="form-control" id="housenumber" name="housenumber" placeholder="Hausnummer">
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">PLZ:</span>
+        </div>
+        <input type="text" class="form-control" id="postcode" name="postcode" placeholder="PLZ">
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Ort:</span>
+        </div>
+        <input type="text" class="form-control" id="place" name="place" placeholder="Ort">
+    </div>
+    <div class="input-group mt-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01" style="width: 10rem;">Übungsdiensttag</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect01" type="text" name="day">
+        <option selected>Wähle aus...</option>
+        <option value="Montag">Montag</option>
+        <option value="Dienstag">Dienstag</option>
+        <option value="Mittwoch">Mittwoch</option>
+        <option value="Donnerstag">Donnerstag</option>
+        <option value="Freitag">Freitag</option>
+        <option value="Samstag">Samstag</option>
+        <option value="Sonntag">Sonntag</option>
+      </select>
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Startzeit:</span>
+        </div>
+        <input class="form-control" id="starttime" name="starttime" placeholder="SS:MM" type="time"/>
+    </div>
+    <div class="input-group mt-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" style="width: 10rem;">Endzeit:</span>
+        </div>
+        <input class="form-control" id="endtime" name="endtime" placeholder="SS:MM" type="time"/>
+    </div>
+
+    <div class="login-div-button text-center mt-2">
+    <input type="submit" value="Speichern" name="save" id="save" class="btn btn-success login-button"></input>
+    </div>
+</form>

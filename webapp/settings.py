@@ -30,6 +30,16 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(SITE_ROOT, 'static/'),
+    '/var/www/static/',
+    "./general/static",
+]
+
+IMAGEFIT_ROOT = "public"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,8 +49,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'imagefit',
     'users.apps.UsersConfig',
+    'equipments',
+    'profiles',
     'units',
+    'newsletters',
+    'events',
+    'knowledges',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +74,11 @@ ROOT_URLCONF = 'webapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(os.path.dirname(__file__) ,'../templates').replace('\\','/'),
+            './webapp/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,9 +128,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'europe/berlin'
 
 USE_I18N = True
 
@@ -123,3 +143,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+parent_dir = os.path.abspath(os.path.dirname(__file__) + '/..')
+MEDIA_ROOT = os.path.join(parent_dir, 'media/')
+MEDIA_URL = '/media/'
