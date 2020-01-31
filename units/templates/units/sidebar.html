@@ -10,7 +10,7 @@
         {% endfor %}
     </div>
     {% if user.is_authenticated and user_permissions.e_user == True %}
-    IN PROGRESS
+        IN PROGRESS
         <div class="card-footer nav justify-content-center nav-pills">
             <a class="nav-link btn btn-light" title="Erstelle eine neue Nachricht" href="{% url 'newsletters:news_create' %}">
                 <img src="{% static 'icons/add.svg' %}">
