@@ -16,6 +16,7 @@ class Profile(models.Model):
     group = models.ForeignKey('Group',on_delete=models.CASCADE, null=True, blank=True)
     role = models.ForeignKey('Role',default= 4 ,on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(null=True,blank=True)
+    admin = models.BooleanField(null=True, blank=True, default=False)
 
     @property
     def image_url(self):
@@ -43,15 +44,14 @@ class Group(models.Model):
     description = models.TextField(null=True, blank=True)
     
     def __str__(self):
-        return '{0}'.format(self.name)
+        return '{0} ({1})'.format(self.name, self.id)
 
 class Role(models.Model):
     name = models.CharField(max_length=256) 
-    prio = models.IntegerField(unique=True, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     
     def __str__(self):
-        return '(Prio: {0}) {1} [{2}]'.format(self.prio,self.name, self.id)
+        return '{0}'.format(self.name)
     
     def show_name(self):
         return self.name
