@@ -1,0 +1,151 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% load imagefit %}
+{% block sidebar %}
+    {% include 'units/sidebar.html' %}
+{% endblock%}
+{% block content%}
+<div class="card text-left" style="width: auto; height: auto; margin-right: 5px;">
+    <div class="card-header">
+      <img src="{{ unit.image.url }}" class="card-img-top" alt="{{ unit.slug }}" >
+    </div>
+
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingZero">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseZero" aria-expanded="false" aria-controls="collapseZero">
+                  Standort
+                </button>
+              </h2>
+            </div>
+            <div id="collapseZero" class="collapse" aria-labelledby="headingZero" data-parent="#accordionExample">
+              <div class="card-body">
+                <ul class="list-unstyled">
+                  <li>{{ unit.name }}</li>
+                  <li>{{ unit.street}} {{ unit.housenumber}}</li>
+                  <li>{{ unit.postcode }} {{ unit.place }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Einheitsführung
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <div class="row">
+                    {% for leadership in leaderships %}
+                      <div class="col">
+                        <div class="card w-75">
+                          <h5 class="card-header">
+                            <a href="{% url 'profiles:detail_profil' user=leadership.username %}" class="nav-link">
+                              {{leadership.username}}
+                            </a>
+                          </h5>
+                          {% if leadership.image %}
+                            <div class="text-center card">
+                              <img src="{{ leadership.image.url }}" class="figure-img img-fluid rounded" style="width: 70%; vertical-align: center;" alt="images.{{leadership.username}}">
+                            </div>
+                          {% endif %}
+                          <div class="card-body">
+                            <h6 class="card-title">{{leadership.lastname}}, {{leadership.firstname}}</h6>
+                            <p class="card-text text-muted">
+                              <ul class="list-unstyled">
+                                <li>Einheit: {{leadership.unit}}</li>
+                                <li>Geburtstag: {{leadership.birthday}}</li>
+                                <li>Email: {{leadership.email}}</li>
+                                <li>Handynummer: {{leadership.mobile}}</li>
+                              </ul>
+                            </p>
+                          </div>
+                        </div>   
+                      </div>  
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Jugendwarte
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  <div class="row">
+                    {% for young_leadership in young_leaderships %}
+                      <div class="col">
+                        <div class="card w-75">
+                          <h5 class="card-header">
+                            <a href="{% url 'profiles:detail_profil' user=young_leadership.username %}" class="nav-link">
+                              {{young_leadership.username}}
+                            </a>
+                          </h5>
+                          {% if young_leadership.image %}
+                            <div class="text-center card">
+                              <img src="{{ young_leadership.image.url }}" class="figure-img img-fluid rounded" style="width: 70%; vertical-align: center;" alt="images.{{young_leadership.username}}">
+                            </div>
+                          {% endif %}
+                          <div class="card-body">
+                            <h6 class="card-title">{{young_leadership.lastname}}, {{young_leadership.firstname}}</h6>
+                            <p class="card-text text-muted">
+                              <ul class="list-unstyled">
+                                <li>Einheit: {{young_leadership.unit}}</li>
+                                <li>Geburtstag: {{young_leadership.birthday}}</li>
+                                <li>Email: {{young_leadership.email}}</li>
+                                <li>Handynummer: {{young_leadership.mobile}}</li>
+                              </ul>
+                            </p>
+                          </div>
+                        </div>   
+                      </div>  
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Mitgliederzahlen
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingFour">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      Dienstzeiten
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  </div>
+                </div>
+
+            </div>
+          </div>
+
+    <div class="card-footer text-muted">
+        Sie finden uns auch unter folgendem Link:
+        <a href="https:{{unit.website}}">{{unit.website}}</a>
+    </div>
+</div>
+{% endblock %}

@@ -6,15 +6,15 @@
 {% endblock%}
 {% block content%}
 <div class="card-columns">
-  {% for unit in units %}
+  {% for nav_unit in nav_units %}
   <div class="card text-left" style="width: auto; height: auto;">
       <div class="card-header">
         <div class="row">
           <div class="col-10 my-auto">
-            <h4>Einheit: {{unit.slug}}</h4>
+            <h4>Einheit: {{nav_unit.slug}}</h4>
           </div>
           <div class="col-2 nav justify-content-center">
-            <a class="nav-link btn btn-light" href="{% url 'newsletters:news_create' %}">
+            <a class="nav-link btn btn-light" href="{% url 'units:unit_detail' nav_unit.slug %}">
               <img src="{% static 'icons/show.svg' %}">
             </a>
           </div>
@@ -24,17 +24,17 @@
       <div class="card-body">
           <h5 class="card-title">Adresse:</h5>
           <ul class="list-unstyled">
-              <li>{{unit.name}}</li>
-              <li>{{unit.street}} {{unit.housenumber}}</li>
-              <li>{{unit.postcode}} {{unit.place}}</li>
+              <li>{{nav_unit.name}}</li>
+              <li>{{nav_unit.street}} {{nav_unit.housenumber}}</li>
+              <li>{{nav_unit.postcode}} {{nav_unit.place}}</li>
           </ul>
       </div>
       <div class="card-footer text-muted">
           <h5 class="card-title">Übungsdienstzeiten:</h5>
           <ul class="list-unstyled">
-              <li>Tag: {{unit.day}}</li>
-              <li>Beginn: {{unit.starttime}}</li>
-              <li>Ende: {{unit.endtime}}</li>
+              <li>Tag: {{nav_unit.day}}</li>
+              <li>Beginn: {{nav_unit.starttime}}</li>
+              <li>Ende: {{nav_unit.endtime}}</li>
           </ul>
       </div>
   </div>
@@ -66,7 +66,6 @@
             </div>
           </div>
         </div>
-
         {% endfor %}
     </div>
   </div>
