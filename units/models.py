@@ -3,11 +3,14 @@ from django.db import models
 
 class Unit(models.Model):
     slug = models.CharField(max_length=20, null=True, blank=True)
+    image = models.ImageField(upload_to='images' ,null=True, blank=True)
+    wallpaper = models.CharField(max_length=256, null=True, blank=True)
     name = models.CharField(max_length=256)
     street = models.CharField(max_length=256)
     housenumber = models.CharField(max_length=256)
     postcode = models.CharField(max_length=256)
     place = models.CharField(max_length=256)
+    website = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self):
         return '{0}'.format(self.slug)
