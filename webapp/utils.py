@@ -11,6 +11,13 @@ ROLE_BETREUERTEAM = 2
 ROLE_FEUERWEHRKIND = 6
 ROLE_USER = 4
 
+#Alle GruppenIDs
+GROUP_ACTIVE = 10
+GROUP_JUGEND = 7
+GROUP_EHREN = 11
+GROUP_UNTERSTÜTZUNG = 8
+GROUP_STADT = 9
+
 def get_current_user(user):
     try:
         users = Profile.objects.get(username=user.id)
