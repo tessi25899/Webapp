@@ -2,6 +2,21 @@ from django.db import models
 from django.conf import settings
 
 class Profile(models.Model):
+    USER_GROUP = (
+        (1,'Stadt'),
+        (2,'Aktive Wehr'),
+        (3,'Jugendfeuerwehr'),
+        (4,'Unterstützungseinheit'),
+        (5,'Alter und Ehrenabteilung'),
+    )
+    USER_ROLE = (
+        (1,'Leiter der Feuerwehr'),
+        (2,'Stadtjugendwart'),
+        (3,'Einheitsführung'),
+        (4,'Jugendwart'),
+        (5,'Betreuerteam'),
+    )
+
     username = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,)
     firstname = models.CharField(max_length=256)
     lastname = models.CharField(max_length=256)
@@ -13,8 +28,8 @@ class Profile(models.Model):
     mobile = models.CharField(max_length=256, null=True, blank=True)
     unit = models.ForeignKey('units.unit',on_delete=models.CASCADE, null=True, blank=True)
     entrydate = models.DateField(null=True, blank=True)
-    group = models.ForeignKey('Group',on_delete=models.CASCADE, null=True, blank=True)
-    role = models.ForeignKey('Role',default= 4 ,on_delete=models.CASCADE, null=True, blank=True)
+    group = models.IntegerField(max_length=30, null=True, blank=True, choices=USER_GROUP)
+    role = models.IntegerField(max_length=30, null=True, blank=True, choices=USER_ROLE)
     email = models.EmailField(null=True,blank=True)
     admin = models.BooleanField(null=True, blank=True, default=False)
 
