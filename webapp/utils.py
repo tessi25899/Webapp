@@ -1,22 +1,19 @@
 from users.models import *
 from profiles.models import *
 
-#Alle RollenIDs
-ROLE_ADMIN = 1
-ROLE_STADTJUGENDWART = 3
-ROLE_LEITER = 8
-ROLE_JUGENDWART = 5
-ROLE_EINHEITSFUEHRUNG = 7
-ROLE_BETREUERTEAM = 2
-ROLE_FEUERWEHRKIND = 6
-ROLE_USER = 4
-
 #Alle GruppenIDs
-GROUP_ACTIVE = 10
-GROUP_JUGEND = 7
-GROUP_EHREN = 11
-GROUP_UNTERSTÜTZUNG = 8
-GROUP_STADT = 9
+GROUP_STADT = 1
+GROUP_AKTIVE = 2
+GROUP_JUGEND = 3
+GROUP_UNTERSTÜTZUNG = 4
+GROUP_ALTERABTEILUNG = 5
+
+#Alle RollenIDs
+ROLE_LEITER = 1
+ROLE_STADTJUGENDWART = 2
+ROLE_EINHEITSFUEHRUNG = 3
+ROLE_JUGENDWART = 4
+ROLE_BETREUERTEAM = 5
 
 def get_current_user(user):
     try:
@@ -38,7 +35,7 @@ def check_user(user):
 def check_admin(user):
     current_user = get_current_user(user)
     if not current_user == None:
-        if current_user.role.id == ROLE_ADMIN or current_user.role.id == ROLE_STADTJUGENDWART or current_user.role.id == ROLE_LEITER:
+        if current_user.admin == True or current_user.role.id == ROLE_STADTJUGENDWART or current_user.role.id == ROLE_LEITER:
             print("Admin")
             return True
         else:
