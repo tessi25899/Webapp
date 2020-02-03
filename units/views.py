@@ -27,11 +27,13 @@ def detail(request, unit):
     leaderships = Profile.objects.all().filter(unit=unit.id,role=ROLE_EINHEITSFUEHRUNG)
     young_leaderships = Profile.objects.all().filter(unit=unit.id,role=ROLE_JUGENDWART)
 
-
-    amount_active = Profile.objects.all().filter(unit=unit.id,group=GROUP_ACTIVE).count()
     
-    amount_young = Profile.objects.all().filter(unit=unit.id,group=GROUP_JUGEND).count()
-    print("Anzahl der Mitglieder=",amount_young)
+    amount_active = Profile.objects.all().filter(unit=unit.id,group=GROUP_AKTIVE).count() #Aktive
+    amount_young = Profile.objects.all().filter(unit=unit.id,group=GROUP_JUGEND).count() #Jugendfeuerwehr
+    amount_counselors = Profile.objects.all().filter(unit=unit.id,role=ROLE_BETREUERTEAM).count() #Betreuer
+    amount_honor = Profile.objects.all().filter(unit=unit.id,group=GROUP_ALTERABTEILUNG).count() #Alters und Ehrenabteilung
+    amounts = {"amount_active":amount_active, "amount_young":amount_young,"amount_honor":amount_honor,"amount_counselors":amount_counselors}
 
-    context = {'nav_units':nav_units,'unit':unit,'young_leaderships':young_leaderships,'leaderships':leaderships,'user_permissions':user_permissions}
+    context = {'nav_units':nav_units,'unit':unit,'young_leaderships':young_leaderships,'leaderships':leaderships,'user_permissions':user_permissions,'amounts':amounts}
     return render(request, template_name="units/unit_detail.html",context=context)
+    
