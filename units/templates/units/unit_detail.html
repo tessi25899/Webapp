@@ -123,7 +123,32 @@
               </div>
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Abteilung</th>
+                        <th scope="col">Mitgleiderzahl</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Aktive Wehr</th>
+                        <td>{{ amounts.amount_active }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Jugendfeuerwehr</th>
+                        <td>{{ amounts.amount_young }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Betreuerteam</th>
+                        <td>{{ amounts.amount_counselors }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Alter und Ehrenabteilung</th>
+                        <td>{{ amounts.amount_honor }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <div class="card">
