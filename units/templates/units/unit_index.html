@@ -5,6 +5,42 @@
     {% include 'units/sidebar.html' %}
 {% endblock%}
 {% block content%}
+<div class="card-columns">
+  {% for nav_unit in nav_units %}
+  <div class="card text-left" style="width: auto; height: auto;">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-10 my-auto">
+            <h4>Einheit: {{nav_unit.slug}}</h4>
+          </div>
+          <div class="col-2 nav justify-content-center">
+            <a class="nav-link btn btn-light" href="{% url 'units:unit_detail' nav_unit.slug %}">
+              <img src="{% static 'icons/show.svg' %}">
+            </a>
+          </div>
+        </div>
+      
+      </div>
+      <div class="card-body">
+          <h5 class="card-title">Adresse:</h5>
+          <ul class="list-unstyled">
+              <li>{{nav_unit.name}}</li>
+              <li>{{nav_unit.street}} {{nav_unit.housenumber}}</li>
+              <li>{{nav_unit.postcode}} {{nav_unit.place}}</li>
+          </ul>
+      </div>
+      <div class="card-footer text-muted">
+          <h5 class="card-title">Übungsdienstzeiten:</h5>
+          <ul class="list-unstyled">
+              <li>Tag: {{nav_unit.day}}</li>
+              <li>Beginn: {{nav_unit.starttime}}</li>
+              <li>Ende: {{nav_unit.endtime}}</li>
+          </ul>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+
   <div class="container-fluid ">
     <div class="col-sm-10 pl-0">
         {% for newsletter in newsletters %}
@@ -30,7 +66,6 @@
             </div>
           </div>
         </div>
-
         {% endfor %}
     </div>
   </div>
