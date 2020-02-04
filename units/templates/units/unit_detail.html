@@ -7,7 +7,9 @@
 {% block content%}
 <div class="card text-left" style="width: auto; height: auto; margin-right: 5px;">
     <div class="card-header">
-      <img src="{{ unit.image.url }}" class="card-img-top" alt="{{ unit.slug }}" >
+      {% if unit.image %}
+        <img src="{{ unit.image.url }}" class="card-img-top" alt="{{ unit.slug }}" >
+      {% endif %}
     </div>
 
         <div class="accordion" id="accordionExample">
