@@ -36,7 +36,7 @@
                 <h5>
                     Derzeitige Einheit:
                     <br>
-                    <a class="text-muted" href="{% url 'units:show_units' unit=profile.unit.slug %}">
+                    <a class="text-muted" href="{% url 'units:unit_detail' unit=profile.unit.slug %}">
                         <ul class="list-unstyled">
                             <li><small>{{unit.name}}</small></li>
                             <li><small>{{unit.street}}, {{unit.housenumber}}</small></li>
