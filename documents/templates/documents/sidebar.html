@@ -1,0 +1,22 @@
+{% load static %}
+<div class="card text-left">
+    <div class="card-header text-center">
+      Dokumente
+    </div>
+    {% if user.is_authenticated and request.user.is_superuser%}
+        <div class="card-footer nav flex-column nav-pills">
+            <a class="nav-link btn btn-light"  title="Erstelle einen neuen Termin"  href="{% url 'events:event_create' %}">
+                <img src="{% static 'icons/add.svg' %}">
+                <img src="{% static 'icons/event-note.svg' %}">
+            </a>
+        </div>
+        <div class="card-footer nav justify-content-center nav-pills">
+            <a class="nav-link btn btn-light" title="Erstelle eine neue Kategorie" href="{% url 'events:kind_create' %}">
+                <img src="{% static 'icons/library_add.svg' %}">
+            </a>
+            <a class="nav-link btn btn-light" title="Erstelle eine neue Kategorie" href="{% url 'events:kind_show' %}">
+                <img src="{% static 'icons/library_books.svg' %}">
+            </a>
+        </div>
+    {% endif %}
+</div>
