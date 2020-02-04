@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'newsletters',
     'events',
     'knowledges',
+    'documents',
 ]
 
 MIDDLEWARE = [
