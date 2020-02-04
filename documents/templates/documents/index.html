@@ -1,0 +1,45 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% load imagefit %}
+{% block sidebar %}
+    {% include 'documents/sidebar.html' %}
+{% endblock%}
+{% block content%}
+<div class="card">
+    <div class="card-header">
+        <h5>
+            Hier kannst du alle Vorlagen finden, welche dir in der Jugendarbeit helfen können.
+        </h5>
+    </div>
+        <table class="table table-striped table-bordered table-sm">
+            <thead>
+            <tr>
+                <th class="text-center" scope="col">Name</th>
+                <th class="text-center" scope="col">Ersteller</th>
+                <th class="text-center" scope="col">Letztes Datum</th>
+                <th class="text-center" scope="col">Download</th>
+                <th class="text-center" scope="col">Ansehen</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for document in documents %}
+                    <tr>
+                        <td class="align-middle">{{document.name}}</td>
+                        <td class="align-middle">{{document.owner}}</td>
+                        <td class="align-middle">{{document.published}}</td>
+                        <td class="align-middle text-center">            
+                            <a class="btn" title="Hier kannst du die aktuellste Datei runterladen" href="{% url 'events:kind_show' %}">
+                                <img src="{% static 'icons/download.svg' %}">
+                            </a>      
+                        </td>
+                        <td class="align-middle text-center">
+                            <a  class="btn" title="Erstelle eine neue Kategorie" href="{% url 'events:kind_show' %}">
+                                <img src="{% static 'icons/library_books.svg' %}">
+                            </a>                           
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}

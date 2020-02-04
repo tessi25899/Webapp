@@ -30,6 +30,7 @@ urlpatterns = [
     path('',include('events.urls')),
     path('',include('newsletters.urls')),
     path('',include('knowledges.urls')),
+    path('',include('documents.urls')),
     path(r'^imagefit/', include('imagefit.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
