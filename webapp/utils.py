@@ -87,3 +87,8 @@ def check_einheitsfueher(user):
                 return False
     else:
         return True
+
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

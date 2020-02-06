@@ -1,0 +1,45 @@
+{% extends 'general/main.html' %}
+{% load static %}
+{% load imagefit %}
+{% block sidebar %}
+    {% include 'documents/sidebar.html' %}
+{% endblock%}
+{% block content%}
+<div class="row card-deck">
+  <div class="col">
+    <form method="POST" class="event-form">{% csrf_token %}
+      <div class="card text-center" style="width: 30rem;">
+          <div class="card-header">
+            {{titel}}
+          </div>
+          <div class="card-body">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Termin</span>
+              </div>
+              {{form.name}}
+          </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Beschreibung</span>
+              </div>
+              {{ form.description}}
+            </div>
+            
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+              </div>
+              {{form.document}}
+            </div>
+            </div>
+          <div class="card-footer text-muted">
+            <div class="login-div-button">
+              <input type="submit" value="Hinzufügen" name="save" id="save" class="btn btn-success login-button"/>
+            </div>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
