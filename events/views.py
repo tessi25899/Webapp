@@ -37,12 +37,9 @@ def event_edit(request, pk):
     if request.method == "POST":
         form = EventForm(request.POST, instance=event)
         if form.is_valid():
-            print(event.date)
             event = form.save(commit=False)
             event.save()
             return redirect(reverse('events:events_index'))
-        else:
-            print("not valid")
     else:
         form = EventForm(instance=event)
     context = {'events':Event.objects.all().order_by('date'),'units':Unit.objects.all(), 'kinds':Kindtable.objects.all(),'form':form, 'titel':'Termin bearbeiten'}

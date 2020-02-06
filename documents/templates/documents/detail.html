@@ -10,7 +10,7 @@
     <div class="card-header">
         <div class="row">
             {% if request.user.is_authenticated and request.user.id == docfile.owner.id or c_admin == True%}
-                <div class="col-2"><a href="{% url 'documents:document_delete' pk=docfile.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
+                <div class="col-2"><a href="{% url 'documents:document_edit' pk=docfile.pk %}"><img src="{% static 'icons/edit.svg' %}"></a></div>
                 <div class="col">{{docfile.name}}</div>
                 <div class="col-2"><a href="{% url 'documents:document_delete' pk=docfile.pk %}"><img src="{% static 'icons/delete.svg' %}"></a></div>
             {% else %}

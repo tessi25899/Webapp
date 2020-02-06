@@ -30,15 +30,31 @@ def document_create(request):
     c_admin = check_admin(request.user)
 
     if request.method == "POST":
-        form = FiledocumentForm(request.POST)
+        form = FiledocumentForm(request.POST, request.FILES)
         if form.is_valid():
             document = form.save(commit=False)
-            handle_uploaded_file(request.FILES['file'])
             document.owner = request.user
             document.save()
             return redirect(reverse('documents:documents_index'))
     else:
         form = FiledocumentForm()
+    context = {'documents':documents, 'c_admin':c_admin,'form':form, 'titel':'Dokument hochladen'}
+    return render(request, 'documents/file_form.html', context=context )
+
+def document_edit(request, pk):
+    doc = get_object_or_404(Filedocument, pk=pk)
+    documents = Filedocument.objects.all()
+    c_admin = check_admin(request.user)
+
+    if request.method == "POST":
+        form = FiledocumentForm(request.POST, request.FILES, instance=doc)
+        if form.is_valid():
+            document = form.save(commit=False)
+            document.owner = request.user
+            document.save()
+            return redirect(reverse('documents:documents_index'))
+    else:
+        form = FiledocumentForm(instance=doc)
     context = {'documents':documents, 'c_admin':c_admin,'form':form, 'titel':'Dokument hochladen'}
     return render(request, 'documents/file_form.html', context=context )
 
