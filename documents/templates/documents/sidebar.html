@@ -1,13 +1,12 @@
 {% load static %}
 <div class="card text-left">
     <div class="card-header text-center">
-      Dokumente
+      Dokumente / Vorlagen
     </div>
-    {% if user.is_authenticated and request.user.is_superuser%}
+    {% if user.is_authenticated or c_admin == True%}
         <div class="card-footer nav flex-column nav-pills">
-            <a class="nav-link btn btn-light"  title="Erstelle einen neuen Termin"  href="{% url 'events:event_create' %}">
-                <img src="{% static 'icons/add.svg' %}">
-                <img src="{% static 'icons/event-note.svg' %}">
+            <a class="nav-link btn btn-light"  title="Lade eine neue Datei hoch"  href="{% url 'documents:document_create' %}">
+                <img src="{% static 'icons/upload.svg' %}">
             </a>
         </div>
         <div class="card-footer nav justify-content-center nav-pills">

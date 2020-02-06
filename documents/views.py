@@ -6,11 +6,9 @@ from .models import *
 from webapp.utils import *
 from django.http import Http404  
 import os
-
 from django.http import FileResponse
 from django.utils.text import slugify
-
-
+from .forms import FiledocumentForm, CommentaryForm
 
 def index(request):
     documents = Filedocument.objects.all()
@@ -19,14 +17,30 @@ def index(request):
     context = {'documents':documents, 'c_admin':c_admin}
     return render(request, template_name="documents/index.html",context=context)
 
-
 def detail(request, name):
     documents = Filedocument.objects.all()
     docfile = Filedocument.objects.get(name=name)
     c_admin = check_admin(request.user)
-
-    context = {'docfile':docfile,'documents':documents, 'c_admin':c_admin}
+    comments = Commentary.objects.filter(filedocument=docfile.id)
+    context = {'docfile':docfile,'documents':documents, 'c_admin':c_admin,'comments':comments}
     return render(request, template_name="documents/detail.html",context=context)
+
+def document_create(request):
+    documents = Filedocument.objects.all()
+    c_admin = check_admin(request.user)
+
+    if request.method == "POST":
+        form = FiledocumentForm(request.POST)
+        if form.is_valid():
+            document = form.save(commit=False)
+            handle_uploaded_file(request.FILES['file'])
+            document.owner = request.user
+            document.save()
+            return redirect(reverse('documents:documents_index'))
+    else:
+        form = FiledocumentForm()
+    context = {'documents':documents, 'c_admin':c_admin,'form':form, 'titel':'Dokument hochladen'}
+    return render(request, 'documents/file_form.html', context=context )
 
 def delete(request,pk):
     try:
@@ -35,7 +49,6 @@ def delete(request,pk):
             filedoc.delete()
     finally:
         return redirect(reverse('documents:documents_index'))
-
 
 def document_download(request, id):
     item = get_object_or_404(Filedocument, pk=id)
